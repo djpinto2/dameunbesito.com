@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Carrito Simple - Dame Un Besito</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            padding: 20px;
+            background: linear-gradient(135deg, #fce4ec, #f8bbd9);
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+        }
+        .test-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .test-title {
+            text-align: center;
+            color: #e91e63;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        .test-product {
+            border: 2px solid #f1f3f4;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            background: #fafafa;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .test-product img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .test-product-info {
+            flex: 1;
+        }
+        .test-product h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        .test-product .price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #e91e63;
+            margin-bottom: 1rem;
+        }
+        .test-product .add-to-cart-btn {
+            background: linear-gradient(135deg, #e91e63, #ff6b9d);
+            color: white;
+            border: none;
+            padding: 0.875rem 1.5rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(233, 30, 99, 0.2);
+            transition: all 0.3s ease;
+        }
+        .test-product .add-to-cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.3);
+        }
+        .test-product .add-to-cart-btn.added {
+            background: #4caf50;
+        }
+        .debug-info {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 2rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        .instructions {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+        .instructions h4 {
+            color: #1976d2;
+            margin-bottom: 0.5rem;
+        }
+        .instructions ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+        .instructions li {
+            margin-bottom: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1 class="test-title">🧪 Test Carrito Simple</h1>
+        
+        <div class="instructions">
+            <h4>📋 Instrucciones de Prueba:</h4>
+            <ul>
+                <li>Haz clic en "Agregar al Carrito" en cualquier producto</li>
+                <li>Verifica que aparezca la notificación</li>
+                <li>Haz clic en el botón flotante del carrito (esquina inferior derecha)</li>
+                <li>Verifica que el carrito se abra SIN sombreado en toda la página</li>
+                <li>Revisa que los productos se vean con imágenes y precios</li>
+            </ul>
+        </div>
+        
+        <div class="test-product">
+            <img src="assets/images/cheesecake-frutos-rojos.jpg" alt="Cheesecake" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div style="display: none; width: 80px; height: 80px; align-items: center; justify-content: center; background: linear-gradient(135deg, #fce4ec, #f8bbd9); border-radius: 10px; font-size: 2rem;">🍰</div>
+            <div class="test-product-info">
+                <h3>🍰 Cheesecake de Frutos Rojos</h3>
+                <div class="price">$800</div>
+                <button class="add-to-cart-btn" data-name="Cheesecake de Frutos Rojos" data-price="800" data-image="assets/images/cheesecake-frutos-rojos.jpg">
+                    <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
+        
+        <div class="test-product">
+            <img src="assets/images/alfajores-chocolate.jpg" alt="Alfajores" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div style="display: none; width: 80px; height: 80px; align-items: center; justify-content: center; background: linear-gradient(135deg, #fce4ec, #f8bbd9); border-radius: 10px; font-size: 2rem;">🍪</div>
+            <div class="test-product-info">
+                <h3>🍪 Alfajores de Chocolate</h3>
+                <div class="price">$300</div>
+                <button class="add-to-cart-btn" data-name="Alfajores de Chocolate" data-price="300" data-image="assets/images/alfajores-chocolate.jpg">
+                    <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
+        
+        <div class="test-product">
+            <img src="assets/images/meringue-pie.jpg" alt="Torta Rogel" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div style="display: none; width: 80px; height: 80px; align-items: center; justify-content: center; background: linear-gradient(135deg, #fce4ec, #f8bbd9); border-radius: 10px; font-size: 2rem;">🎂</div>
+            <div class="test-product-info">
+                <h3>🎂 Torta Rogel</h3>
+                <div class="price">$1200</div>
+                <button class="add-to-cart-btn" data-name="Torta Rogel" data-price="1200" data-image="assets/images/meringue-pie.jpg">
+                    <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
+        
+        <div class="debug-info">
+            <h4>🔍 Información de Debug:</h4>
+            <p>• Abre la consola del navegador (F12) para ver los logs</p>
+            <p>• Verifica que NO haya sombreado en toda la página</p>
+            <p>• El carrito debe abrirse solo en el lado derecho</p>
+            <p>• Los productos deben tener imágenes y precios visibles</p>
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="menu.html" style="background: #e91e63; color: white; padding: 12px 24px; text-decoration: none; border-radius: 25px; font-weight: 600;">
+                <i class="fas fa-arrow-left"></i> Volver al Menú
+            </a>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-cart"></i> Carrito de Compras</h3>
+            <button class="cart-close" id="cart-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-content">
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items will be added here dynamically -->
+            </div>
+            <div class="cart-empty" id="cart-empty">
+                <i class="fas fa-shopping-basket"></i>
+                <p>Tu carrito está vacío</p>
+                <span>Agrega algunos productos deliciosos</span>
+            </div>
+        </div>
+        <div class="cart-footer" id="cart-footer" style="display: none;">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-amount" id="total-amount">$0.00</span>
+            </div>
+            <button class="btn btn-primary whatsapp-order" id="whatsapp-order">
+                <i class="fab fa-whatsapp"></i> Hacer Pedido por WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- Floating Cart Button -->
+    <div class="floating-cart" id="floating-cart">
+        <button class="cart-toggle" id="cart-toggle">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cart-count">0</span>
+        </button>
+    </div>
+
+    <script src="js/cart-simple.js"></script>
+</body>
+</html> 

@@ -177,18 +177,12 @@ function toggleCartSimple() {
     console.log('🔄 Alternando carrito');
     
     const cartSidebar = document.getElementById('cart-sidebar');
-    const cartOverlay = document.getElementById('cart-overlay');
     
-    if (cartSidebar && cartOverlay) {
+    if (cartSidebar) {
         cartSidebar.classList.toggle('open');
-        cartOverlay.classList.toggle('active');
         
-        // Prevenir scroll del body
-        if (cartSidebar.classList.contains('open')) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-        }
+        // NO aplicar sombreado a toda la página
+        // El carrito se abre sin afectar el resto de la página
     }
 }
 
@@ -197,12 +191,9 @@ function closeCartSimple() {
     console.log('❌ Cerrando carrito');
     
     const cartSidebar = document.getElementById('cart-sidebar');
-    const cartOverlay = document.getElementById('cart-overlay');
     
-    if (cartSidebar && cartOverlay) {
+    if (cartSidebar) {
         cartSidebar.classList.remove('open');
-        cartOverlay.classList.remove('active');
-        document.body.style.overflow = '';
     }
 }
 
@@ -265,7 +256,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Agregar event listeners para el carrito
     const cartToggle = document.getElementById('cart-toggle');
     const cartClose = document.getElementById('cart-close');
-    const cartOverlay = document.getElementById('cart-overlay');
     
     if (cartToggle) {
         cartToggle.addEventListener('click', toggleCartSimple);
@@ -275,11 +265,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (cartClose) {
         cartClose.addEventListener('click', closeCartSimple);
         console.log('✅ Event listener agregado a cart-close');
-    }
-    
-    if (cartOverlay) {
-        cartOverlay.addEventListener('click', closeCartSimple);
-        console.log('✅ Event listener agregado a cart-overlay');
     }
     
     // Inicializar display del carrito
