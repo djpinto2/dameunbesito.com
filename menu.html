@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/fix-menu.css">
+    <script src="js/cart-simple.js"></script>
     
     <!-- CRÍTICO: Estilos que fuerzan la visibilidad -->
     <style>
@@ -552,99 +553,28 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
     <script>
-        // SCRIPT AGRESIVO PARA FORZAR VISIBILIDAD
-        function forceMenuVisibility() {
-            console.log('🔧 FORZANDO VISIBILIDAD DE ELEMENTOS DEL MENÚ...');
+        // SCRIPT DE VERIFICACIÓN
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔍 Verificando funcionalidad del carrito...');
             
-            const menuItems = document.querySelectorAll('.menu-item');
-            console.log('📦 Encontrados', menuItems.length, 'elementos del menú');
-            
-            menuItems.forEach(function(item, index) {
-                const itemInfo = item.querySelector('.item-info');
-                const itemDetails = item.querySelector('.item-details');
-                const price = item.querySelector('.price');
-                const addToCartBtn = item.querySelector('.add-to-cart-btn');
-                const category = item.querySelector('.category');
-                
-                console.log('🍰 Producto', index + 1, ':', {
-                    itemInfo: itemInfo ? '✅ Encontrado' : '❌ Faltante',
-                    itemDetails: itemDetails ? '✅ Encontrado' : '❌ Faltante',
-                    price: price ? '✅ Encontrado' : '❌ Faltante',
-                    addToCartBtn: addToCartBtn ? '✅ Encontrado' : '❌ Faltante',
-                    category: category ? '✅ Encontrado' : '❌ Faltante'
-                });
-                
-                                        // FORZAR VISIBILIDAD CON MÁXIMA PRIORIDAD
-            if (itemInfo) {
-                itemInfo.style.cssText = 'display: flex !important; flex-direction: column !important; visibility: visible !important; opacity: 1 !important; position: relative !important; z-index: 9999 !important; height: 100% !important; justify-content: space-between !important; padding: 1rem !important;';
+            // Verificar que el script simple esté cargado
+            if (typeof addToCartSimple === 'function') {
+                console.log('✅ Función addToCartSimple disponible');
+            } else {
+                console.error('❌ Función addToCartSimple no encontrada');
             }
             
-            if (itemDetails) {
-                itemDetails.style.cssText = 'display: flex !important; visibility: visible !important; opacity: 1 !important; position: relative !important; z-index: 9999 !important; justify-content: space-between !important; align-items: center !important; margin-top: 1rem !important; padding-top: 1rem !important; border-top: 1px solid #f1f3f4 !important; margin-bottom: 1rem !important;';
-            }
+            // Verificar botones
+            const buttons = document.querySelectorAll('.add-to-cart-btn');
+            console.log('🔘 Botones encontrados:', buttons.length);
             
-            if (price) {
-                price.style.cssText = 'display: block !important; visibility: visible !important; opacity: 1 !important; position: relative !important; z-index: 9999 !important; font-size: 1.3rem !important; font-weight: 700 !important; color: #e91e63 !important;';
-            }
-            
-            if (addToCartBtn) {
-                addToCartBtn.style.cssText = 'display: flex !important; visibility: visible !important; opacity: 1 !important; position: relative !important; z-index: 9999 !important; width: 100% !important; background: linear-gradient(135deg, #e91e63, #ff6b9d) !important; color: white !important; border: none !important; padding: 0.875rem 1.5rem !important; border-radius: 12px !important; font-size: 0.95rem !important; font-weight: 600 !important; cursor: pointer !important; margin-top: auto !important; box-shadow: 0 4px 12px rgba(233, 30, 99, 0.2) !important; align-items: center !important; justify-content: center !important; gap: 0.5rem !important;';
-            }
-            
-            if (category) {
-                category.style.cssText = 'display: inline-block !important; visibility: visible !important; opacity: 1 !important; position: relative !important; z-index: 9999 !important; background: linear-gradient(135deg, #e91e63, #ff6b9d) !important; color: white !important; padding: 0.4rem 0.8rem !important; border-radius: 20px !important; font-size: 0.8rem !important; font-weight: 500 !important; text-transform: uppercase !important; letter-spacing: 0.5px !important;';
-            }
-            
-            // Aplicar flexbox al contenedor del menú item
-            item.style.cssText = 'display: flex !important; flex-direction: column !important; visibility: visible !important; opacity: 1 !important; position: relative !important; z-index: 1 !important; flex: 1 1 350px !important; max-width: 400px !important; min-width: 280px !important; background: #fff !important; border-radius: 20px !important; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important; overflow: hidden !important; height: 100% !important;';
+            buttons.forEach((button, index) => {
+                const name = button.getAttribute('data-name');
+                const price = button.getAttribute('data-price');
+                console.log(`Botón ${index + 1}: ${name} - $${price}`);
             });
-            
-            console.log('✅ VISIBILIDAD FORZADA COMPLETADA');
-        }
-        
-        // Ejecutar inmediatamente cuando el DOM esté listo
-        document.addEventListener('DOMContentLoaded', forceMenuVisibility);
-        
-        // Ejecutar también cuando la página esté completamente cargada
-        window.addEventListener('load', forceMenuVisibility);
-        
-        // Ejecutar después de un pequeño delay para asegurar que todo esté renderizado
-        setTimeout(forceMenuVisibility, 100);
-        setTimeout(forceMenuVisibility, 500);
-        setTimeout(forceMenuVisibility, 1000);
-        
-        // Ejecutar cada vez que se redimensione la ventana
-        window.addEventListener('resize', forceMenuVisibility);
-        
-        // ELIMINAR BOTONES DUPLICADOS
-        function removeDuplicateButtons() {
-            console.log('🔧 ELIMINANDO BOTONES DUPLICADOS...');
-            
-            const menuItems = document.querySelectorAll('.menu-item');
-            menuItems.forEach(function(item, index) {
-                const buttons = item.querySelectorAll('.add-to-cart-btn');
-                console.log('Producto', index + 1, 'tiene', buttons.length, 'botones');
-                
-                // Si hay más de un botón, eliminar los duplicados
-                if (buttons.length > 1) {
-                    console.log('❌ Eliminando botones duplicados en producto', index + 1);
-                    // Mantener solo el primer botón
-                    for (let i = 1; i < buttons.length; i++) {
-                        buttons[i].remove();
-                    }
-                }
-            });
-            
-            console.log('✅ ELIMINACIÓN DE DUPLICADOS COMPLETADA');
-        }
-        
-        // Ejecutar la eliminación de duplicados
-        document.addEventListener('DOMContentLoaded', removeDuplicateButtons);
-        window.addEventListener('load', removeDuplicateButtons);
-        setTimeout(removeDuplicateButtons, 100);
-        setTimeout(removeDuplicateButtons, 500);
+        });
     </script>
 </body>
 </html> 
