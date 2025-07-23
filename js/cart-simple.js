@@ -54,6 +54,18 @@ function updateCartDisplaySimple() {
     const totalAmountElement = document.getElementById('total-amount');
     
     console.log('🔄 Actualizando display del carrito...');
+    console.log('🔍 Elementos encontrados:', {
+        cartCount: !!cartCountElement,
+        cartItems: !!cartItemsElement,
+        cartEmpty: !!cartEmptyElement,
+        cartFooter: !!cartFooterElement,
+        totalAmount: !!totalAmountElement
+    });
+    console.log('📊 Estado del carrito:', {
+        itemsCount: cart.length,
+        totalItems: cartCount,
+        items: cart
+    });
     
     // Actualizar contador
     if (cartCountElement) {
@@ -80,34 +92,47 @@ function updateCartDisplaySimple() {
         
         // Renderizar items
         if (cartItemsElement) {
-            cartItemsElement.innerHTML = cart.map(item => {
+            console.log('🎨 Renderizando', cart.length, 'items del carrito...');
+            
+            const itemsHTML = cart.map(item => {
                 const itemTotal = (item.price * item.quantity).toFixed(2);
+                console.log('📦 Renderizando item:', item.name, 'cantidad:', item.quantity, 'precio:', item.price);
                 
                 return `
-                    <div class="cart-item" data-name="${item.name}">
-                        <div class="cart-item-image">
-                            ${item.image ? `<img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : ''}
+                    <div class="cart-item" data-name="${item.name}" style="display: flex !important; visibility: visible !important; opacity: 1 !important;">
+                        <div class="cart-item-image" style="display: flex !important; visibility: visible !important;">
+                            ${item.image ? `<img src="${item.image}" alt="${item.name}" style="display: block !important; visibility: visible !important;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : ''}
                             <div style="display: ${item.image ? 'none' : 'flex'}; width: 100%; height: 100%; align-items: center; justify-content: center; background: linear-gradient(135deg, #fce4ec, #f8bbd9); border-radius: 10px; font-size: 2rem;">🍰</div>
                         </div>
-                        <div class="cart-item-info">
-                            <div class="cart-item-title">${item.name}</div>
-                            <div class="cart-item-price">$${item.price.toFixed(2)}</div>
-                            <div class="cart-item-quantity">
-                                <button class="quantity-btn" onclick="updateQuantitySimple('${item.name}', ${item.quantity - 1})" title="Reducir cantidad">
+                        <div class="cart-item-info" style="display: flex !important; visibility: visible !important;">
+                            <div class="cart-item-title" style="display: block !important; visibility: visible !important;">${item.name}</div>
+                            <div class="cart-item-price" style="display: block !important; visibility: visible !important;">$${item.price.toFixed(2)}</div>
+                            <div class="cart-item-quantity" style="display: flex !important; visibility: visible !important;">
+                                <button class="quantity-btn" onclick="updateQuantitySimple('${item.name}', ${item.quantity - 1})" title="Reducir cantidad" style="display: flex !important; visibility: visible !important;">
                                     <i class="fas fa-minus"></i>
                                 </button>
-                                <span class="quantity-display">${item.quantity}</span>
-                                <button class="quantity-btn" onclick="updateQuantitySimple('${item.name}', ${item.quantity + 1})" title="Aumentar cantidad">
+                                <span class="quantity-display" style="display: block !important; visibility: visible !important;">${item.quantity}</span>
+                                <button class="quantity-btn" onclick="updateQuantitySimple('${item.name}', ${item.quantity + 1})" title="Aumentar cantidad" style="display: flex !important; visibility: visible !important;">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </div>
                         </div>
-                        <button class="cart-item-remove" onclick="removeFromCartSimple('${item.name}')" title="Eliminar producto">
+                        <button class="cart-item-remove" onclick="removeFromCartSimple('${item.name}')" title="Eliminar producto" style="display: flex !important; visibility: visible !important;">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
                 `;
             }).join('');
+            
+            cartItemsElement.innerHTML = itemsHTML;
+            cartItemsElement.style.display = 'block';
+            cartItemsElement.style.visibility = 'visible';
+            cartItemsElement.style.opacity = '1';
+            
+            console.log('✅ HTML del carrito generado:', itemsHTML.length, 'caracteres');
+            console.log('🎯 Elementos del carrito encontrados después del render:', cartItemsElement.children.length);
+        } else {
+            console.error('❌ Elemento cart-items no encontrado!');
         }
         
         console.log('💰 Total:', total);

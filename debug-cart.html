@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Carrito - Dame Un Besito</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            padding: 20px;
+            background: linear-gradient(135deg, #fce4ec, #f8bbd9);
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+        }
+        .debug-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .debug-title {
+            text-align: center;
+            color: #e91e63;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        .debug-section {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .debug-section h3 {
+            color: #495057;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        .debug-info {
+            font-family: monospace;
+            font-size: 0.9rem;
+            background: #e9ecef;
+            padding: 0.5rem;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+        }
+        .test-product {
+            border: 2px solid #f1f3f4;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            background: #fafafa;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .test-product img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .test-product-info {
+            flex: 1;
+        }
+        .test-product h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        .test-product .price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #e91e63;
+            margin-bottom: 1rem;
+        }
+        .test-product .add-to-cart-btn {
+            background: linear-gradient(135deg, #e91e63, #ff6b9d);
+            color: white;
+            border: none;
+            padding: 0.875rem 1.5rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(233, 30, 99, 0.2);
+            transition: all 0.3s ease;
+        }
+        .test-product .add-to-cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.3);
+        }
+        .debug-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .debug-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .debug-btn:hover {
+            background: #5a6268;
+        }
+        .debug-btn.success {
+            background: #28a745;
+        }
+        .debug-btn.danger {
+            background: #dc3545;
+        }
+        .debug-btn.warning {
+            background: #ffc107;
+            color: #212529;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-container">
+        <h1 class="debug-title">🐛 Debug Carrito</h1>
+        
+        <div class="debug-section">
+            <h3>🔧 Controles de Debug</h3>
+            <div class="debug-buttons">
+                <button class="debug-btn" onclick="debugCart()">🔍 Ver Estado del Carrito</button>
+                <button class="debug-btn" onclick="debugElements()">🎯 Verificar Elementos</button>
+                <button class="debug-btn success" onclick="addTestItem()">➕ Agregar Item de Prueba</button>
+                <button class="debug-btn danger" onclick="clearCart()">🗑️ Limpiar Carrito</button>
+                <button class="debug-btn warning" onclick="forceUpdate()">🔄 Forzar Actualización</button>
+                <button class="debug-btn" onclick="toggleCart()">🛒 Abrir/Cerrar Carrito</button>
+            </div>
+        </div>
+        
+        <div class="debug-section">
+            <h3>📊 Estado Actual del Carrito</h3>
+            <div id="cart-status" class="debug-info">Cargando...</div>
+        </div>
+        
+        <div class="debug-section">
+            <h3>🎯 Elementos del DOM</h3>
+            <div id="elements-status" class="debug-info">Cargando...</div>
+        </div>
+        
+        <div class="debug-section">
+            <h3>🧪 Productos de Prueba</h3>
+            
+            <div class="test-product">
+                <img src="assets/images/cheesecake-frutos-rojos.jpg" alt="Cheesecake" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div style="display: none; width: 80px; height: 80px; align-items: center; justify-content: center; background: linear-gradient(135deg, #fce4ec, #f8bbd9); border-radius: 10px; font-size: 2rem;">🍰</div>
+                <div class="test-product-info">
+                    <h3>🍰 Cheesecake de Frutos Rojos</h3>
+                    <div class="price">$800</div>
+                    <button class="add-to-cart-btn" data-name="Cheesecake de Frutos Rojos" data-price="800" data-image="assets/images/cheesecake-frutos-rojos.jpg">
+                        <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                    </button>
+                </div>
+            </div>
+            
+            <div class="test-product">
+                <img src="assets/images/alfajores-chocolate.jpg" alt="Alfajores" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div style="display: none; width: 80px; height: 80px; align-items: center; justify-content: center; background: linear-gradient(135deg, #fce4ec, #f8bbd9); border-radius: 10px; font-size: 2rem;">🍪</div>
+                <div class="test-product-info">
+                    <h3>🍪 Alfajores de Chocolate</h3>
+                    <div class="price">$300</div>
+                    <button class="add-to-cart-btn" data-name="Alfajores de Chocolate" data-price="300" data-image="assets/images/alfajores-chocolate.jpg">
+                        <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="menu.html" style="background: #e91e63; color: white; padding: 12px 24px; text-decoration: none; border-radius: 25px; font-weight: 600;">
+                <i class="fas fa-arrow-left"></i> Volver al Menú
+            </a>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-cart"></i> Carrito de Compras</h3>
+            <button class="cart-close" id="cart-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-content">
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items will be added here dynamically -->
+            </div>
+            <div class="cart-empty" id="cart-empty">
+                <i class="fas fa-shopping-basket"></i>
+                <p>Tu carrito está vacío</p>
+                <span>Agrega algunos productos deliciosos</span>
+            </div>
+        </div>
+        <div class="cart-footer" id="cart-footer" style="display: none;">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-amount" id="total-amount">$0.00</span>
+            </div>
+            <button class="btn btn-primary whatsapp-order" id="whatsapp-order">
+                <i class="fab fa-whatsapp"></i> Hacer Pedido por WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- Floating Cart Button -->
+    <div class="floating-cart" id="floating-cart">
+        <button class="cart-toggle" id="cart-toggle">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cart-count">0</span>
+        </button>
+    </div>
+
+    <script src="js/cart-simple.js"></script>
+    <script>
+        // Funciones de debug
+        function debugCart() {
+            const status = document.getElementById('cart-status');
+            status.innerHTML = `
+                <strong>Estado del Carrito:</strong><br>
+                • Items en carrito: ${cart.length}<br>
+                • Total de items: ${cartCount}<br>
+                • Items: ${JSON.stringify(cart, null, 2)}
+            `;
+        }
+        
+        function debugElements() {
+            const elements = document.getElementById('elements-status');
+            const cartItems = document.getElementById('cart-items');
+            const cartEmpty = document.getElementById('cart-empty');
+            const cartFooter = document.getElementById('cart-footer');
+            
+            elements.innerHTML = `
+                <strong>Elementos del DOM:</strong><br>
+                • cart-items: ${cartItems ? '✅ Encontrado' : '❌ No encontrado'}<br>
+                • cart-empty: ${cartEmpty ? '✅ Encontrado' : '❌ No encontrado'}<br>
+                • cart-footer: ${cartFooter ? '✅ Encontrado' : '❌ No encontrado'}<br>
+                • cart-items children: ${cartItems ? cartItems.children.length : 'N/A'}<br>
+                • cart-items display: ${cartItems ? cartItems.style.display : 'N/A'}<br>
+                • cart-items visibility: ${cartItems ? cartItems.style.visibility : 'N/A'}
+            `;
+        }
+        
+        function addTestItem() {
+            addToCartSimple('Item de Prueba', 500, null, 'test');
+            debugCart();
+            debugElements();
+        }
+        
+        function clearCart() {
+            cart = [];
+            cartCount = 0;
+            updateCartDisplaySimple();
+            debugCart();
+            debugElements();
+        }
+        
+        function forceUpdate() {
+            updateCartDisplaySimple();
+            debugCart();
+            debugElements();
+        }
+        
+        function toggleCart() {
+            toggleCartSimple();
+        }
+        
+        // Inicializar debug al cargar
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                debugCart();
+                debugElements();
+            }, 1000);
+        });
+    </script>
+</body>
+</html> 
