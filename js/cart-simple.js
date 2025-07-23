@@ -86,18 +86,23 @@ function updateCartDisplaySimple() {
                 return `
                     <div class="cart-item" data-name="${item.name}">
                         <div class="cart-item-image">
-                            ${item.image ? `<img src="${item.image}" alt="${item.name}">` : '🍰'}
+                            ${item.image ? `<img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : ''}
+                            <div style="display: ${item.image ? 'none' : 'flex'}; width: 100%; height: 100%; align-items: center; justify-content: center; background: linear-gradient(135deg, #fce4ec, #f8bbd9); border-radius: 10px; font-size: 2rem;">🍰</div>
                         </div>
                         <div class="cart-item-info">
                             <div class="cart-item-title">${item.name}</div>
                             <div class="cart-item-price">$${item.price.toFixed(2)}</div>
                             <div class="cart-item-quantity">
-                                <button class="quantity-btn" onclick="updateQuantitySimple('${item.name}', ${item.quantity - 1})">-</button>
+                                <button class="quantity-btn" onclick="updateQuantitySimple('${item.name}', ${item.quantity - 1})" title="Reducir cantidad">
+                                    <i class="fas fa-minus"></i>
+                                </button>
                                 <span class="quantity-display">${item.quantity}</span>
-                                <button class="quantity-btn" onclick="updateQuantitySimple('${item.name}', ${item.quantity + 1})">+</button>
+                                <button class="quantity-btn" onclick="updateQuantitySimple('${item.name}', ${item.quantity + 1})" title="Aumentar cantidad">
+                                    <i class="fas fa-plus"></i>
+                                </button>
                             </div>
                         </div>
-                        <button class="cart-item-remove" onclick="removeFromCartSimple('${item.name}')">
+                        <button class="cart-item-remove" onclick="removeFromCartSimple('${item.name}')" title="Eliminar producto">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
