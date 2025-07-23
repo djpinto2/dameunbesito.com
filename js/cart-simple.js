@@ -292,11 +292,70 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('✅ Event listener agregado a cart-close');
     }
     
-    // Inicializar display del carrito
-    updateCartDisplaySimple();
-    
-    console.log('✅ Carrito simple inicializado correctamente');
+                // Inicializar display del carrito
+            updateCartDisplaySimple();
+            
+            // Agregar event listener para el botón de WhatsApp
+            const whatsappButton = document.getElementById('whatsapp-order');
+            if (whatsappButton) {
+                whatsappButton.addEventListener('click', sendWhatsAppOrder);
+                console.log('✅ Event listener agregado a whatsapp-order');
+            }
+            
+            console.log('✅ Carrito simple inicializado correctamente');
 });
+
+// Función para enviar pedido por WhatsApp
+function sendWhatsAppOrder() {
+    console.log('📱 Enviando pedido por WhatsApp...');
+    
+    if (cart.length === 0) {
+        showNotification('El carrito está vacío');
+        return;
+    }
+    
+    // Calcular total
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
+    // Crear mensaje
+    let message = '🍰 *PEDIDO - DAME UN BESITO* 🍰\n\n';
+    message += 'Hola! Quiero hacer el siguiente pedido:\n\n';
+    
+    // Agregar cada producto
+    cart.forEach((item, index) => {
+        const itemTotal = (item.price * item.quantity).toFixed(2);
+        message += `${index + 1}. *${item.name}*\n`;
+        message += `   Cantidad: ${item.quantity}\n`;
+        message += `   Precio unitario: $${item.price.toFixed(2)}\n`;
+        message += `   Subtotal: $${itemTotal}\n\n`;
+    });
+    
+    // Agregar total
+    message += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+    message += `💰 *TOTAL DEL PEDIDO: $${total.toFixed(2)}* 💰\n\n`;
+    message += '📞 Por favor, confirma mi pedido y coordina la entrega.\n';
+    message += '📍 Dirección de entrega: [Especificar dirección]\n';
+    message += '📱 Mi número: [Especificar número]\n\n';
+    message += '¡Gracias! 😊';
+    
+    // Codificar mensaje para URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Número de WhatsApp (reemplazar con tu número)
+    const phoneNumber = '5491112345678'; // Cambiar por tu número real
+    
+    // Crear URL de WhatsApp
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    console.log('📱 URL de WhatsApp generada:', whatsappURL);
+    console.log('📝 Mensaje:', message);
+    
+    // Abrir WhatsApp
+    window.open(whatsappURL, '_blank');
+    
+    // Mostrar notificación
+    showNotification('Abriendo WhatsApp...');
+}
 
 // Agregar estilos CSS para animaciones
 const style = document.createElement('style');
