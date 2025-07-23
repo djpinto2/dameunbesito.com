@@ -342,7 +342,7 @@ function sendWhatsAppOrder() {
     const encodedMessage = encodeURIComponent(message);
     
     // Número de WhatsApp (reemplazar con tu número)
-    const phoneNumber = '5491112345678'; // Cambiar por tu número real
+    const phoneNumber = '12025318540'; // Número de USA: +1 (202) 531-8540
     
     // Crear URL de WhatsApp
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
