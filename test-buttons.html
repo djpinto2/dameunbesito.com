@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Botones</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Test de Botones de Carrito</h1>
+        
+        <div class="test-item">
+            <h3>Producto de Prueba</h3>
+            <p>Descripción del producto</p>
+            <div class="item-details">
+                <span class="price">$1.500</span>
+                <span class="category">Test</span>
+            </div>
+            <button class="add-to-cart-btn" data-name="Producto de Prueba" data-price="1500" data-image="test.jpg">
+                <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+            </button>
+        </div>
+        
+        <div class="test-item">
+            <h3>Otro Producto</h3>
+            <p>Otra descripción</p>
+            <div class="item-details">
+                <span class="price">$2.000</span>
+                <span class="category">Test</span>
+            </div>
+            <button class="add-to-cart-btn" data-name="Otro Producto" data-price="2000" data-image="test2.jpg">
+                <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+            </button>
+        </div>
+    </div>
+    
+    <script src="js/script.js"></script>
+</body>
+</html> 

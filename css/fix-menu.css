@@ -1,0 +1,102 @@
+/* FIX FOR MENU PRICES AND CART BUTTONS */
+/* Force visibility of all menu elements */
+
+.menu-item .item-info {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+.menu-item .item-details {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+.menu-item .price {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 10 !important;
+    font-size: 1.3rem !important;
+    font-weight: 700 !important;
+    color: #e91e63 !important;
+}
+
+.menu-item .add-to-cart-btn {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 10 !important;
+    width: 100% !important;
+    background: linear-gradient(135deg, #e91e63, #ff6b9d) !important;
+    color: white !important;
+    border: none !important;
+    padding: 0.875rem 1.5rem !important;
+    border-radius: 12px !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    margin-top: 1rem !important;
+    box-shadow: 0 4px 12px rgba(233, 30, 99, 0.2) !important;
+}
+
+.menu-item .add-to-cart-btn i {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin-right: 0.5rem !important;
+}
+
+.menu-item .category {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background: linear-gradient(135deg, #e91e63, #ff6b9d) !important;
+    color: white !important;
+    padding: 0.4rem 0.8rem !important;
+    border-radius: 20px !important;
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* Override any hiding styles */
+.menu-item * {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Ensure menu grid is visible */
+.menu-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 2rem !important;
+    justify-content: center !important;
+    align-items: stretch !important;
+    padding: 1rem 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.menu-item {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    flex: 1 1 350px !important;
+    max-width: 400px !important;
+    min-width: 280px !important;
+    background: #fff !important;
+    border-radius: 20px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+    overflow: hidden !important;
+    position: relative !important;
+    z-index: 1 !important;
+} 

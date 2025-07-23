@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Menu Simple</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <span class="logo-text">Dame Un Besito</span>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="menu.html" class="nav-link active">Menú</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Menu Hero -->
+    <section class="menu-hero">
+        <div class="container">
+            <h1>Test Menú</h1>
+            <p>Prueba de botones</p>
+        </div>
+    </section>
+
+    <!-- Menu Categories -->
+    <section class="menu-categories">
+        <div class="container">
+            <!-- Search Bar -->
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="menu-search" placeholder="Buscar en el menú..." class="search-input">
+                    <button type="button" class="search-clear" id="search-clear">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Category Tabs -->
+            <div class="category-tabs">
+                <button class="tab-btn active" data-category="todos">Todos</button>
+                <button class="tab-btn" data-category="pasteles">Pasteles</button>
+                <button class="tab-btn" data-category="postres">Postres</button>
+                <button class="tab-btn" data-category="galletas">Galletas</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Items -->
+    <section class="menu-items">
+        <div class="container">
+            <div class="menu-grid">
+                <!-- Producto de Prueba -->
+                <div class="menu-item" data-category="postres">
+                    <img src="imagenes/budin de banana y chocolate.jpeg" alt="Budín de Banana y Chocolate">
+                    <div class="item-info">
+                        <h3>Budín de Banana y Chocolate</h3>
+                        <p>Base de banana, chips de chocolate, glaseado en chocolate</p>
+                        <div class="item-details">
+                            <span class="price">$2.500</span>
+                            <span class="category">Postres</span>
+                        </div>
+                        <button class="add-to-cart-btn" data-name="Budín de Banana y Chocolate" data-price="2500" data-image="imagenes/budin de banana y chocolate.jpeg">
+                            <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Otro Producto -->
+                <div class="menu-item" data-category="pasteles">
+                    <img src="imagenes/cheesecake.jpeg" alt="Cheesecakes">
+                    <div class="item-info">
+                        <h3>Cheesecakes</h3>
+                        <p>Base crocante de galletitas, relleno cremoso de queso</p>
+                        <div class="item-details">
+                            <span class="price">$800</span>
+                            <span class="category">Pasteles</span>
+                        </div>
+                        <button class="add-to-cart-btn" data-name="Cheesecakes" data-price="800" data-image="imagenes/cheesecake.jpeg">
+                            <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/script.js"></script>
+</body>
+</html> 

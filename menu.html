@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#e91e63">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Menú - Dame Un Besito</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/fix-menu.css">
+    
+    <!-- CRÍTICO: Estilos que fuerzan la visibilidad -->
+    <style>
+        /* FORZAR VISIBILIDAD DE TODOS LOS ELEMENTOS DEL MENÚ */
+        .menu-item .item-info,
+        .menu-item .item-details,
+        .menu-item .price,
+        .menu-item .add-to-cart-btn,
+        .menu-item .category {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            position: relative !important;
+            z-index: 9999 !important;
+            transform: none !important;
+            clip: auto !important;
+            clip-path: none !important;
+            overflow: visible !important;
+            max-height: none !important;
+            max-width: none !important;
+            min-height: auto !important;
+            min-width: auto !important;
+            width: auto !important;
+            height: auto !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+            background: transparent !important;
+            color: inherit !important;
+            font-size: inherit !important;
+            font-weight: inherit !important;
+            text-decoration: none !important;
+            text-transform: none !important;
+            letter-spacing: normal !important;
+            line-height: normal !important;
+            text-align: left !important;
+            vertical-align: baseline !important;
+            white-space: normal !important;
+            word-spacing: normal !important;
+            text-shadow: none !important;
+            box-shadow: none !important;
+            filter: none !important;
+            backdrop-filter: none !important;
+            -webkit-appearance: none !important;
+            -moz-appearance: none !important;
+            appearance: none !important;
+            -webkit-transform: none !important;
+            -moz-transform: none !important;
+            -ms-transform: none !important;
+            -o-transform: none !important;
+            -webkit-transition: none !important;
+            -moz-transition: none !important;
+            -o-transition: none !important;
+            transition: none !important;
+            -webkit-animation: none !important;
+            -moz-animation: none !important;
+            -o-animation: none !important;
+            animation: none !important;
+        }
+        
+        /* Restaurar estilos específicos después de forzar visibilidad */
+        .menu-item .item-info {
+            display: flex !important;
+            flex-direction: column !important;
+            padding: 1rem !important;
+            height: 100% !important;
+            justify-content: space-between !important;
+        }
+        
+        .menu-item .item-details {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            margin-top: 1rem !important;
+            padding-top: 1rem !important;
+            border-top: 1px solid #f1f3f4 !important;
+            margin-bottom: 1rem !important;
+        }
+        
+        .menu-item .price {
+            display: block !important;
+            font-size: 1.3rem !important;
+            font-weight: 700 !important;
+            color: #e91e63 !important;
+        }
+        
+        .menu-item .add-to-cart-btn {
+            display: flex !important;
+            width: 100% !important;
+            background: linear-gradient(135deg, #e91e63, #ff6b9d) !important;
+            color: white !important;
+            border: none !important;
+            padding: 0.875rem 1.5rem !important;
+            border-radius: 12px !important;
+            font-size: 0.95rem !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            margin-top: auto !important;
+            box-shadow: 0 4px 12px rgba(233, 30, 99, 0.2) !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 0.5rem !important;
+        }
+        
+        .menu-item .category {
+            display: inline-block !important;
+            background: linear-gradient(135deg, #e91e63, #ff6b9d) !important;
+            color: white !important;
+            padding: 0.4rem 0.8rem !important;
+            border-radius: 20px !important;
+            font-size: 0.8rem !important;
+            font-weight: 500 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+        }
+        
+        /* Asegurar que el grid del menú funcione */
+        .menu-grid {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 2rem !important;
+            justify-content: center !important;
+            align-items: stretch !important;
+            padding: 1rem 0 !important;
+        }
+        
+        /* OCULTAR COMPLETAMENTE LA LUPA */
+        .search-icon,
+        .fa-search,
+        i.fa-search {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            width: 0 !important;
+            height: 0 !important;
+            overflow: hidden !important;
+            position: absolute !important;
+            left: -9999px !important;
+            top: -9999px !important;
+        }
+        
+        .menu-item {
+            display: flex !important;
+            flex-direction: column !important;
+            flex: 1 1 350px !important;
+            max-width: 400px !important;
+            min-width: 280px !important;
+            background: #fff !important;
+            border-radius: 20px !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+            overflow: hidden !important;
+            position: relative !important;
+            height: 100% !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <img src="assets/images/logo.png" alt="Dame Un Besito Logo" class="logo-img">
+                    <span class="logo-text">Dame Un Besito</span>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="menu.html" class="nav-link active">Menú</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="ubicacion.html" class="nav-link">Ubicación</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contacto.html" class="nav-link">Contacto</a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-cart"></i> Carrito de Compras</h3>
+            <button class="cart-close" id="cart-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-content">
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items will be added here dynamically -->
+            </div>
+            <div class="cart-empty" id="cart-empty">
+                <i class="fas fa-shopping-basket"></i>
+                <p>Tu carrito está vacío</p>
+                <span>Agrega algunos productos deliciosos</span>
+            </div>
+        </div>
+        <div class="cart-footer" id="cart-footer" style="display: none;">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-amount" id="total-amount">$0.00</span>
+            </div>
+            <button class="btn btn-primary whatsapp-order" id="whatsapp-order">
+                <i class="fab fa-whatsapp"></i> Hacer Pedido por WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+
+    <!-- Floating Cart Button -->
+    <div class="floating-cart" id="floating-cart">
+        <button class="cart-toggle" id="cart-toggle">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cart-count">0</span>
+        </button>
+    </div>
+
+    <!-- Menu Hero -->
+    <section class="menu-hero">
+        <div class="container">
+            <h1>Nuestro Menú</h1>
+            <p>Descubre todos nuestros deliciosos pasteles y postres artesanales</p>
+        </div>
+    </section>
+
+    <!-- Menu Categories -->
+    <section class="menu-categories">
+        <div class="container">
+            <!-- Search Bar -->
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="menu-search" placeholder="Buscar pasteles, postres, galletas..." class="search-input">
+                    <button type="button" class="search-clear" id="search-clear">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Category Tabs -->
+            <div class="category-tabs">
+                <button class="tab-btn active" data-category="todos">Todos</button>
+                <button class="tab-btn" data-category="pasteles">Pasteles</button>
+                <button class="tab-btn" data-category="postres">Postres</button>
+                <button class="tab-btn" data-category="galletas">Galletas</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Items -->
+    <section class="menu-items">
+        <div class="container">
+            <div class="menu-grid">
+                <!-- PASTELERÍA -->
+                <!-- Budín de Banana y Chocolate -->
+                <div class="menu-item" data-category="postres">
+                    <img src="imagenes/budin de banana y chocolate.jpeg" alt="Budín de Banana y Chocolate">
+                    <div class="item-info">
+                        <h3>Budín de Banana y Chocolate</h3>
+                        <p>Base de banana, chips de chocolate, glaseado en chocolate</p>
+                        <div class="item-details">
+                            <span class="price">$2.500</span>
+                            <span class="category">Postres</span>
+                        </div>
+                        <button class="add-to-cart-btn" data-name="Budín de Banana y Chocolate" data-price="2500" data-image="imagenes/budin de banana y chocolate.jpeg">
+                            <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Budín de Limón -->
+                <div class="menu-item" data-category="postres">
+                    <img src="imagenes/budin de limon.jpeg" alt="Budín de Limón">
+                    <div class="item-info">
+                        <h3>Budín de Limón</h3>
+                        <p>Base de limón con glaze</p>
+                        <div class="item-details">
+                            <span class="price">$2.200</span>
+                            <span class="category">Postres</span>
+                        </div>
+                        <button class="add-to-cart-btn" data-name="Budín de Limón" data-price="2200" data-image="imagenes/budin de limon.jpeg">
+                            <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- MINI TORTITAS -->
+                <!-- Mini Tortitas: Cheesecakes -->
+                <div class="menu-item" data-category="pasteles">
+                    <img src="imagenes/cheesecake.jpeg" alt="Cheesecakes">
+                    <div class="item-info">
+                        <h3>Cheesecakes</h3>
+                        <p>Base crocante de galletitas, relleno cremoso de queso</p>
+                        <p><strong>Variedades:</strong> Frutos rojos, dulce de leche, chocolate</p>
+                        <div class="item-details">
+                            <span class="price">$800</span>
+                            <span class="category">Pasteles</span>
+                        </div>
+                        <button class="add-to-cart-btn" data-name="Cheesecakes" data-price="800" data-image="imagenes/cheesecake.jpeg">
+                            <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pasta Frola Tradicional -->
+                <div class="menu-item" data-category="pasteles">
+                    <img src="imagenes/pasta frola tradicional.jpeg" alt="Pasta Frola Tradicional">
+                    <div class="item-info">
+                        <h3>Pasta Frola Tradicional</h3>
+                        <p>Masa dulce y suave, rellena con dulce de membrillo y cubierta con el clásico enrejado</p>
+                        <div class="item-details">
+                            <span class="price">$600</span>
+                            <span class="category">Pasteles</span>
+                        </div>
+                        <button class="add-to-cart-btn" data-name="Pasta Frola Tradicional" data-price="600" data-image="imagenes/pasta frola tradicional.jpeg">
+                            <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mini Tortitas: Torta Rogel -->
+                <div class="menu-item" data-category="pasteles">
+                    <img src="imagenes/torta rogel.jpeg" alt="Torta Rogel">
+                    <div class="item-info">
+                        <h3>Torta Rogel</h3>
+                        <p>Capas finas y crocantes de masa, rellenas con dulce de leche y cubierta con merengue italiano</p>
+                        <div class="item-details">
+                            <span class="price">$1.200</span>
+                            <span class="category">Pasteles</span>
+                        </div>
+                        <button class="add-to-cart-btn" data-name="Torta Rogel" data-price="1200" data-image="imagenes/torta rogel.jpeg">
+                            <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mini Tortitas: Lemon Pie -->
+                <div class="menu-item" data-category="pasteles">
+                    <img src="imagenes/lemon pie.jpeg" alt="Lemon Pie">
+                    <div class="item-info">
+                        <h3>Lemon Pie</h3>
+                        <p>Masa crocante con filling de limón</p>
+                        <div class="item-details">
+                            <span class="price">$700</span>
+                            <span class="category">Pasteles</span>
+                        </div>
+                        <button class="add-to-cart-btn" data-name="Lemon Pie" data-price="700" data-image="imagenes/lemon pie.jpeg">
+                            <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ALFAJORCITOS -->
+                <!-- Alfajorcitos de Dulce de Leche -->
+                <div class="menu-item" data-category="galletas">
+                    <img src="imagenes/alfajorcitos de dulce de leche.jpeg" alt="Alfajorcitos de Dulce de Leche">
+                    <div class="item-info">
+                        <h3>Alfajorcitos de Dulce de Leche</h3>
+                        <p>Base de galleta de manteca, cubierto en chocolate o azúcar impalpable</p>
+                        <div class="item-details">
+                            <span class="price">$300</span>
+                            <span class="category">Galletas</span>
+                        </div>
+                        <button class="add-to-cart-btn" data-name="Alfajorcitos de Dulce de Leche" data-price="300" data-image="imagenes/alfajorcitos de dulce de leche.jpeg">
+                            <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Alfajorcitos de Merengue -->
+                <div class="menu-item" data-category="galletas">
+                    <img src="imagenes/alfajarcitos de merengue.jpeg" alt="Alfajorcitos de Merengue">
+                    <div class="item-info">
+                        <h3>Alfajorcitos de Merengue</h3>
+                        <p>Merengue rellenos con DDL</p>
+                        <div class="item-details">
+                            <span class="price">$350</span>
+                            <span class="category">Galletas</span>
+                        </div>
+                        <button class="add-to-cart-btn" data-name="Alfajorcitos de Merengue" data-price="350" data-image="imagenes/alfajarcitos de merengue.jpeg">
+                            <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- COOKIES -->
+                <!-- Cookies Estilo NYC -->
+                <div class="menu-item" data-category="galletas">
+                    <img src="imagenes/cookies estilo nyc.jpeg" alt="Cookies Estilo NYC">
+                    <div class="item-info">
+                        <h3>Cookies Estilo NYC</h3>
+                        <p>Crocantes por fuera y blanditas por dentro con chips de chocolate</p>
+                        <div class="item-details">
+                            <span class="price">$250</span>
+                            <span class="category">Galletas</span>
+                        </div>
+                        <button class="add-to-cart-btn" data-name="Cookies Estilo NYC" data-price="250" data-image="imagenes/cookies estilo nyc.jpeg">
+                            <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SALUDABLE -->
+                <!-- Saludable: Muffins de banana y avena -->
+                <div class="menu-item" data-category="postres">
+                    <img src="imagenes/muffins de banana y avena.jpeg" alt="Muffins de banana y avena">
+                    <div class="item-info">
+                        <h3>Muffins de banana y avena</h3>
+                        <p>Con salvado de avena, sin azúcar o manteca</p>
+                        <div class="item-details">
+                            <span class="price">$400</span>
+                            <span class="category">Postres</span>
+                        </div>
+                        <button class="add-to-cart-btn" data-name="Muffins de banana y avena" data-price="400" data-image="imagenes/muffins de banana y avena.jpeg">
+                            <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Saludable: Budín de naranja -->
+                <div class="menu-item" data-category="postres">
+                    <img src="imagenes/budin de naranja y zanahoria.jpeg" alt="Budín de naranja">
+                    <div class="item-info">
+                        <h3>Budín de naranja</h3>
+                        <p>Base de naranja y salvado de avena endulzado con edulcorante o miel</p>
+                        <div class="item-details">
+                            <span class="price">$2.000</span>
+                            <span class="category">Postres</span>
+                        </div>
+                        <button class="add-to-cart-btn" data-name="Budín de naranja" data-price="2000" data-image="imagenes/budin de naranja y zanahoria.jpeg">
+                            <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Saludable: Budín de Zanahoria -->
+                <div class="menu-item" data-category="postres">
+                    <img src="imagenes/budin de naranja y zanahoria.jpeg" alt="Budín de Zanahoria">
+                    <div class="item-info">
+                        <h3>Budín de Zanahoria</h3>
+                        <p>Suave, húmedo y sin azúcar ni manteca</p>
+                        <div class="item-details">
+                            <span class="price">$2.300</span>
+                            <span class="category">Postres</span>
+                        </div>
+                        <button class="add-to-cart-btn" data-name="Budín de Zanahoria" data-price="2300" data-image="imagenes/budin de naranja y zanahoria.jpeg">
+                            <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mini Tortitas: Cheesecakes -->
+                <div class="menu-item" data-category="pasteles">
+                    <img src="imagenes/mini torta cheesecake.jpeg" alt="Cheesecakes Saludables">
+                    <div class="item-info">
+                        <h3>Mini Tortas: Cheesecakes</h3>
+                        <p>Base crocante de avena, relleno cremoso de yogurt griego</p>
+                        <div class="item-details">
+                            <span class="price">$900</span>
+                            <span class="category">Pasteles</span>
+                        </div>
+                        <button class="add-to-cart-btn" data-name="Mini Tortas: Cheesecakes" data-price="900" data-image="imagenes/mini torta cheesecake.jpeg">
+                            <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Granola -->
+                <div class="menu-item" data-category="galletas">
+                    <img src="imagenes/granola.jpeg" alt="Granola">
+                    <div class="item-info">
+                        <h3>Granola</h3>
+                        <p>De avena, mix de nueces y frutos secos con miel</p>
+                        <p><strong>Peso:</strong> 200g</p>
+                        <div class="item-details">
+                            <span class="price">$1.500</span>
+                            <span class="category">Galletas</span>
+                        </div>
+                        <button class="add-to-cart-btn" data-name="Granola" data-price="1500" data-image="imagenes/granola.jpeg">
+                            <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Orders -->
+    <section class="special-orders">
+        <div class="container">
+            <div class="special-content">
+                <h2>Pedidos Especiales</h2>
+                <p>¿Tienes una celebración especial? Podemos crear pasteles personalizados para tu evento. Contáctanos para más información.</p>
+                <a href="contacto.html" class="btn btn-primary">Solicitar Pedido Especial</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Dame Un Besito</h3>
+                    <p>Dulces momentos, con amor</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Horarios</h4>
+                    <p>Lunes - Viernes: 8:00 AM - 8:00 PM</p>
+                    <p>Sábados: 9:00 AM - 6:00 PM</p>
+                    <p>Domingos: 10:00 AM - 4:00 PM</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p><i class="fas fa-phone"></i> +1 (202) 531-8540</p>
+                    <p><i class="fas fa-envelope"></i> info@dameunbesito.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Nordelta, Tigre, Buenos Aires</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Dame Un Besito. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // SCRIPT AGRESIVO PARA FORZAR VISIBILIDAD
+        function forceMenuVisibility() {
+            console.log('🔧 FORZANDO VISIBILIDAD DE ELEMENTOS DEL MENÚ...');
+            
+            const menuItems = document.querySelectorAll('.menu-item');
+            console.log('📦 Encontrados', menuItems.length, 'elementos del menú');
+            
+            menuItems.forEach(function(item, index) {
+                const itemInfo = item.querySelector('.item-info');
+                const itemDetails = item.querySelector('.item-details');
+                const price = item.querySelector('.price');
+                const addToCartBtn = item.querySelector('.add-to-cart-btn');
+                const category = item.querySelector('.category');
+                
+                console.log('🍰 Producto', index + 1, ':', {
+                    itemInfo: itemInfo ? '✅ Encontrado' : '❌ Faltante',
+                    itemDetails: itemDetails ? '✅ Encontrado' : '❌ Faltante',
+                    price: price ? '✅ Encontrado' : '❌ Faltante',
+                    addToCartBtn: addToCartBtn ? '✅ Encontrado' : '❌ Faltante',
+                    category: category ? '✅ Encontrado' : '❌ Faltante'
+                });
+                
+                                        // FORZAR VISIBILIDAD CON MÁXIMA PRIORIDAD
+            if (itemInfo) {
+                itemInfo.style.cssText = 'display: flex !important; flex-direction: column !important; visibility: visible !important; opacity: 1 !important; position: relative !important; z-index: 9999 !important; height: 100% !important; justify-content: space-between !important; padding: 1rem !important;';
+            }
+            
+            if (itemDetails) {
+                itemDetails.style.cssText = 'display: flex !important; visibility: visible !important; opacity: 1 !important; position: relative !important; z-index: 9999 !important; justify-content: space-between !important; align-items: center !important; margin-top: 1rem !important; padding-top: 1rem !important; border-top: 1px solid #f1f3f4 !important; margin-bottom: 1rem !important;';
+            }
+            
+            if (price) {
+                price.style.cssText = 'display: block !important; visibility: visible !important; opacity: 1 !important; position: relative !important; z-index: 9999 !important; font-size: 1.3rem !important; font-weight: 700 !important; color: #e91e63 !important;';
+            }
+            
+            if (addToCartBtn) {
+                addToCartBtn.style.cssText = 'display: flex !important; visibility: visible !important; opacity: 1 !important; position: relative !important; z-index: 9999 !important; width: 100% !important; background: linear-gradient(135deg, #e91e63, #ff6b9d) !important; color: white !important; border: none !important; padding: 0.875rem 1.5rem !important; border-radius: 12px !important; font-size: 0.95rem !important; font-weight: 600 !important; cursor: pointer !important; margin-top: auto !important; box-shadow: 0 4px 12px rgba(233, 30, 99, 0.2) !important; align-items: center !important; justify-content: center !important; gap: 0.5rem !important;';
+            }
+            
+            if (category) {
+                category.style.cssText = 'display: inline-block !important; visibility: visible !important; opacity: 1 !important; position: relative !important; z-index: 9999 !important; background: linear-gradient(135deg, #e91e63, #ff6b9d) !important; color: white !important; padding: 0.4rem 0.8rem !important; border-radius: 20px !important; font-size: 0.8rem !important; font-weight: 500 !important; text-transform: uppercase !important; letter-spacing: 0.5px !important;';
+            }
+            
+            // Aplicar flexbox al contenedor del menú item
+            item.style.cssText = 'display: flex !important; flex-direction: column !important; visibility: visible !important; opacity: 1 !important; position: relative !important; z-index: 1 !important; flex: 1 1 350px !important; max-width: 400px !important; min-width: 280px !important; background: #fff !important; border-radius: 20px !important; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important; overflow: hidden !important; height: 100% !important;';
+            });
+            
+            console.log('✅ VISIBILIDAD FORZADA COMPLETADA');
+        }
+        
+        // Ejecutar inmediatamente cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', forceMenuVisibility);
+        
+        // Ejecutar también cuando la página esté completamente cargada
+        window.addEventListener('load', forceMenuVisibility);
+        
+        // Ejecutar después de un pequeño delay para asegurar que todo esté renderizado
+        setTimeout(forceMenuVisibility, 100);
+        setTimeout(forceMenuVisibility, 500);
+        setTimeout(forceMenuVisibility, 1000);
+        
+        // Ejecutar cada vez que se redimensione la ventana
+        window.addEventListener('resize', forceMenuVisibility);
+        
+        // ELIMINAR BOTONES DUPLICADOS
+        function removeDuplicateButtons() {
+            console.log('🔧 ELIMINANDO BOTONES DUPLICADOS...');
+            
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(function(item, index) {
+                const buttons = item.querySelectorAll('.add-to-cart-btn');
+                console.log('Producto', index + 1, 'tiene', buttons.length, 'botones');
+                
+                // Si hay más de un botón, eliminar los duplicados
+                if (buttons.length > 1) {
+                    console.log('❌ Eliminando botones duplicados en producto', index + 1);
+                    // Mantener solo el primer botón
+                    for (let i = 1; i < buttons.length; i++) {
+                        buttons[i].remove();
+                    }
+                }
+            });
+            
+            console.log('✅ ELIMINACIÓN DE DUPLICADOS COMPLETADA');
+        }
+        
+        // Ejecutar la eliminación de duplicados
+        document.addEventListener('DOMContentLoaded', removeDuplicateButtons);
+        window.addEventListener('load', removeDuplicateButtons);
+        setTimeout(removeDuplicateButtons, 100);
+        setTimeout(removeDuplicateButtons, 500);
+    </script>
+</body>
+</html> 
